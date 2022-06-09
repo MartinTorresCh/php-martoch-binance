@@ -3,7 +3,7 @@
     "type": "library",
     "description": "BINANCE API LIBRARY client based on GuzzleHttp",
     "keywords": ["binance","api","guzzle"],
-    "homepage": "",
+    "homepage": "https://github.com/MartinTorresCh/php-martoch-binance",
     "license": "MIT",
     "authors": [
         {
