@@ -432,10 +432,26 @@ class BinanceClient
         $this->path = "/fapi/v1/";      
     }
 
+    //set FAPIV2 path
+    public function useFAPIV2(){
+        $this->path = "/fapi/v2/";      
+    }
+
     //set SAPI path
     public function useSAPI(){
         $this->path = "/sapi/v1/";        
     }
+
+    //set DAPI path
+    public function useDAPI(){
+        $this->path = "/dapi/v1/";        
+    }
+
+    //set DAPI path
+    public function useVAPI(){
+        $this->path = "/vapi/v1/";        
+    }
+
 
     //set Call Type
     public function useGET(){
@@ -453,6 +469,8 @@ class BinanceClient
     public function useDELETE(){
         $this->call_type = "DELETE";
     }
+
+
 
     //set Cluster URL endopoint
     public function urlClusterConfig($index){
