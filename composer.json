@@ -1,5 +1,5 @@
 {
-    "name": "MARTOCH/php-martoch-binance",
+    "name": "martoch/php-martoch-binance",
     "type": "library",
     "description": "BINANCE API LIBRARY client based on GuzzleHttp",
     "keywords": ["binance","api","guzzle"],
