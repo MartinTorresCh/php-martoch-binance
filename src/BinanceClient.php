@@ -237,7 +237,7 @@ class BinanceClient
                     break;               
             }
 
-            dump([$this->call_type,$url,$params,$this->SECRET_KEY,$this->API_KEY]);
+            
             $response = $client->request($this->call_type, $url, $params);
             
             return $response;
