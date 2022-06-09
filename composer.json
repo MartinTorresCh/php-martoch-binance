@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4" : {
-            "MARTOCH\\binance\\": "src"
+            "MARTOCH\\binance\\": "src/"
         }        
     },
     "version": "1.0.0"    
