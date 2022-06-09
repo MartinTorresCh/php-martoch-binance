@@ -13,9 +13,9 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.3",
         "guzzlehttp/guzzle": "^6.5 | ^7.0",        
-        "ratchet/pawl": "^0.3.0"
+        "ratchet/pawl": "^0.4.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0 | ^8.0"
