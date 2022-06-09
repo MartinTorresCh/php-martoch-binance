@@ -1,0 +1,36 @@
+{
+    "name": "MARTOCH/php-martoch-binance",
+    "type": "library",
+    "description": "BINANCE API LIBRARY client based on GuzzleHttp",
+    "keywords": ["binance","api","guzzle"],
+    "homepage": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Torres Chavez",
+            "email": "martin.torres.ch@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "guzzlehttp/guzzle": "^6.5 | ^7.0",        
+        "ratchet/pawl": "^0.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0 | ^8.0"
+    },
+    "autoload": {
+        "psr-4" : {
+            "DOne\\Altcoin\\": "src"
+        },
+        "files" : [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4" : {
+            "DOne\\Altcoin\\Tests\\": "tests"
+        }
+    }
+}
