@@ -427,6 +427,11 @@ class BinanceClient
         $this->testnet_active = true;
     }
 
+    //set API path
+    public function useAPIV3(){
+        $this->path = "/api/v3/";      
+    }
+
     //set FAPI path
     public function useFAPI(){
         $this->path = "/fapi/v1/";      
@@ -452,6 +457,11 @@ class BinanceClient
         $this->path = "/vapi/v1/";        
     }
 
+    //set DAPI path
+    public function useWAPI(){
+        $this->path = "/wapi/v3/";        
+    }
+     
 
     //set Call Type
     public function useGET(){
