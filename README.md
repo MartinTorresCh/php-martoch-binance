@@ -169,6 +169,8 @@ then you need to add the word **call** at the beginning:
 ->_ticker()->call24hr([]);
 ```
 
+3. use the response as you need
+
 
 ### Example 3
 Same as **example 2** but with a method that uses more than one subpath  
@@ -214,7 +216,61 @@ $result = $binance->_capital()->_withdraw()->apply($params);
 ```
 
 
+3. use the response as you need
 
 
+## Additional Information
 
+1. Binance has a **TESTNET**, to use this api you need to call **useTESTNET()** when you configure your object, this method change the endpoint URL of binance api to the testnet endpoint:
+
+**https://api.binance.com** -> **https://testnet.binancefuture.com**
+
+**Note:** testnet use generaly **/fapi/v1/** path, but can be another diferent, remember set it when config your object
+```
+$my_api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+$my_secret_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+$binance = new BinanceClient($my_api_key,$my_secret_key);
+$binance->useTESTNET();
+$binance->useFAPI();
+
+```
+
+2. Binance api contains multiple endpoints for its API (cluster), you can switch beetween them using the method **urlClusterConfig($index)** (more information in api documentation page)
+
+where **$index** is the array position of the of the following arrays (remember that if you have testnet enabled, the index will be for the testnet cluster, otherwise it will be for the normal api cluster) 
+
+**Note:** for default $index is 0 when you create the BiananceClient object
+
+**Normal api Cluster**
+```
+    [
+        "https://api.binance.com", // index = 0
+        "https://api1.binance.com", // index = 1
+        "https://api2.binance.com", // index = 2
+        "https://api3.binance.com" // index = 3
+    ]
+```
+
+**Testnet api Cluster**
+```
+    [
+        "https://testnet.binancefuture.com", // index = 0
+        
+    ]
+```
+
+example:  
+```
+$my_api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+$my_secret_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+$binance = new BinanceClient($my_api_key,$my_secret_key);
+$binance->urlClusterConfig(1); //this will change the endpoint for: https://api1.binance.com
+$binance->useFAPI();
+
+```
+
+## Licence
+This product is distributed under MIT license.
 
