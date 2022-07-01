@@ -18,6 +18,8 @@ use Throwable;
 use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 
+
+
 class BinanceClient
 {
     use HandlesAsync;
