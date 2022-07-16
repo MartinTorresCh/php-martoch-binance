@@ -99,7 +99,7 @@ class BinanceClient
      * @var array
     */
     protected $cluster_endpoints_testnet = [
-        "https://testnet.binancefuture.com",       
+        "https://testnet.binance.vision",       
     ];
 
     /**
