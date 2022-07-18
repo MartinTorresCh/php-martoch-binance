@@ -396,6 +396,9 @@ class BinanceClient
     }
 
     
+    public function getPath(){        
+        return $this->path;
+    }
 
 
     //set security type
