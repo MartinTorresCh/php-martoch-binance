@@ -432,6 +432,11 @@ class BinanceClient
         $this->testnet_active = true;
     }
 
+    //set no testnet
+    public function useNOTESTNET(){        
+        $this->testnet_active = false;
+    }
+
     //set API path
     public function useAPIV3(){
         $this->path = "/api/v3/";      
