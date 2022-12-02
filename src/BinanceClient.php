@@ -138,7 +138,26 @@ class BinanceClient
     
 
     
+    /**
+     * api key.
+     *
+     * @var string
+     */
+    protected $PROXY_HOST = '';
 
+    /**
+     * api key.
+     *
+     * @var string
+     */
+    protected $PROXY_TIMEOUT = '';
+
+    /**
+     * api key.
+     *
+     * @var string
+     */
+    protected $PROXY_VERIFY = '';
 
 
 
@@ -151,10 +170,14 @@ class BinanceClient
      *
      * @return void
      */
-    public function __construct($API_KEY,$SECRET_KEY)
+    public function __construct($API_KEY,$SECRET_KEY,$PROXY_HOST = NULL,$PROXY_TIMEOUT = NULL,$PROXY_VERIFY = NULL)
     {
         $this->API_KEY = $API_KEY;
         $this->SECRET_KEY = $SECRET_KEY;
+
+        $this->PROXY_HOST = $PROXY_HOST;
+        $this->PROXY_TIMEOUT = $PROXY_TIMEOUT;
+        $this->PROXY_VERIFY = $PROXY_VERIFY;
        
     }
 
@@ -239,7 +262,11 @@ class BinanceClient
                     break;               
             }
 
+           
             
+            if($this->PROXY_HOST)$params['proxy'] = $this->PROXY_HOST;
+            if($this->PROXY_TIMEOUT)$params['timeout'] = $this->PROXY_TIMEOUT;
+            if($this->PROXY_VERIFY)$params['verify'] = $this->PROXY_VERIFY;
             $response = $client->request($this->call_type, $url, $params);
             
             return $response;
