@@ -61,6 +61,13 @@ class BinanceClient
     protected $SECRET_KEY = '';
 
     /**
+     * secret key.
+     *
+     * @var string
+     */
+    protected $FILE_KEY = null;
+
+    /**
      * security type.
      *
      * @var string
@@ -170,7 +177,7 @@ class BinanceClient
      *
      * @return void
      */
-    public function __construct($API_KEY,$SECRET_KEY,$PROXY_HOST = NULL,$PROXY_TIMEOUT = NULL,$PROXY_VERIFY = NULL)
+    public function __construct($API_KEY,$SECRET_KEY,$PROXY_HOST = NULL,$PROXY_TIMEOUT = NULL,$PROXY_VERIFY = NULL,$FILE_KEY = NULL)
     {
         $this->API_KEY = $API_KEY;
         $this->SECRET_KEY = $SECRET_KEY;
@@ -178,7 +185,8 @@ class BinanceClient
         $this->PROXY_HOST = $PROXY_HOST;
         $this->PROXY_TIMEOUT = $PROXY_TIMEOUT;
         $this->PROXY_VERIFY = $PROXY_VERIFY;
-       
+     
+        $this->FILE_KEY = $FILE_KEY;
     }
 
     /**
@@ -240,16 +248,73 @@ class BinanceClient
                     $client = new GuzzleHttp(['http_errors' => false]);                    
                     break;
                 case 'TRADE':
-                    $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);   
-                    $params['query']['signature'] = hash_hmac('SHA256', http_build_query($params_), $this->SECRET_KEY);                
+                    
+                    
+                    if($this->FILE_KEY != null){
+                        
+                        $sign_pair = sodium_crypto_sign_seed_keypair($this->FILE_KEY);
+
+                        $sign_secret = sodium_crypto_sign_secretkey($sign_pair);
+                        $sign_public = sodium_crypto_sign_publickey($sign_pair);
+
+                       
+                        $payload = http_build_query($params_);
+
+                        $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]); 
+                        $params['query']['signature'] = base64_encode(sodium_crypto_sign_detached($payload, $sign_secret));
+                        
+                    }else{
+
+                        $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);   
+                        $params['query']['signature'] = hash_hmac('SHA256', http_build_query($params_), $this->SECRET_KEY);
+                    }
+
                     break;
                 case 'MARGIN':
-                    $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);   
-                    $params['query']['signature'] = hash_hmac('SHA256', http_build_query($params_), $this->SECRET_KEY);                 
+
+                    if($this->FILE_KEY != null){
+                        
+                        $sign_pair = sodium_crypto_sign_seed_keypair($this->FILE_KEY);
+
+                        $sign_secret = sodium_crypto_sign_secretkey($sign_pair);
+                        $sign_public = sodium_crypto_sign_publickey($sign_pair);
+
+                       
+                        $payload = http_build_query($params_);
+
+                        $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]); 
+                        $params['query']['signature'] = base64_encode(sodium_crypto_sign_detached($payload, $sign_secret));
+                        
+                    }else{
+
+                        $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);   
+                        $params['query']['signature'] = hash_hmac('SHA256', http_build_query($params_), $this->SECRET_KEY);     
+                    
+                    }
+
                     break;
                 case 'USER_DATA':
-                    $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);  
-                    $params['query']['signature'] = hash_hmac('SHA256', http_build_query($params_), $this->SECRET_KEY);                  
+
+                    if($this->FILE_KEY != null){
+                        
+                        $sign_pair = sodium_crypto_sign_seed_keypair($this->FILE_KEY);
+
+                        $sign_secret = sodium_crypto_sign_secretkey($sign_pair);
+                        $sign_public = sodium_crypto_sign_publickey($sign_pair);
+
+                       
+                        $payload = http_build_query($params_);
+
+                        $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]); 
+                        $params['query']['signature'] = base64_encode(sodium_crypto_sign_detached($payload, $sign_secret));
+                        
+                    }else{
+
+                        $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);  
+                        $params['query']['signature'] = hash_hmac('SHA256', http_build_query($params_), $this->SECRET_KEY);
+                    
+                    }
+
                     break;
                 case 'USER_STREAM':
                     $client = new GuzzleHttp(['headers' => ['X-MBX-APIKEY' => $this->API_KEY], 'http_errors' => false]);                   
